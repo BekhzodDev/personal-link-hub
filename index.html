@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bekhzod Ikramov | Hub</title>
+    <!-- Premium Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Premium Monochrome Dark Theme */
+            --bg-base: #050505;
+            --glass-bg: rgba(25, 25, 25, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-hover: rgba(35, 35, 35, 0.6);
+            --border-hover: rgba(255, 255, 255, 0.25);
+            --text-main: #ffffff;
+            --text-muted: #999999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            /* Bitta sahifa, scroll umuman bo'lmaydi */
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Ambient Orqa fon nur effekti */
+        .ambient-light {
+            position: absolute;
+            width: 60vh;
+            height: 60vh;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            top: -20%;
+            left: -10%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .ambient-light-2 {
+            top: auto;
+            bottom: -20%;
+            left: auto;
+            right: -10%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 1.2rem 1.5rem;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* --- Header (Profil) --- */
+        .header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-wrap {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+            margin-bottom: 0.8rem;
+        }
+
+        .avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #111;
+        }
+
+        .name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.1rem;
+        }
+
+        .role {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.6rem;
+        }
+
+        .bio {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            font-weight: 300;
+            /* Faqat 3 qatorda kesish */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* --- Bento Grid Layout --- */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-main);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.08); /* Minimalist Neon Glow effect */
+            transform: translateY(-2px);
+        }
+
+        /* Ijtimoiy tarmoqlar (kichik kubiklar) */
+        .card-social {
+            padding: 1.1rem 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .card-social i {
+            font-size: 1.6rem;
+            color: var(--text-main);
+        }
+
+        .card-social span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Keng qatorlar (Portfolio, Ish joylari) */
+        .card-wide {
+            grid-column: span 2;
+            padding: 0.9rem 1.2rem;
+        }
+
+        .card-wide i {
+            font-size: 1.2rem;
+            width: 35px;
+            text-align: center;
+            margin-right: 0.8rem;
+            color: var(--text-main);
+            opacity: 0.9;
+        }
+
+        .card-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .card-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+        }
+
+        /* Maxsus ajratilgan tugma (Portfolio) */
+        .card-highlight {
+            background: rgba(35, 35, 35, 0.5);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        
+        .card-highlight:hover {
+            background: rgba(45, 45, 45, 0.8);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.12);
+        }
+
+        .card-highlight .card-title {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Animatsiyalar */
+        .anim-fade-up {
+            opacity: 0;
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Kichik ekranli telefonlar uchun zichlashtirish */
+        @media (max-height: 650px) {
+            .avatar-wrap { width: 70px; height: 70px; margin-bottom: 0.4rem; }
+            .name { font-size: 1.15rem; }
+            .role { font-size: 0.7rem; margin-bottom: 0.4rem;}
+            .bio { font-size: 0.75rem; }
+            .container { gap: 0.8rem; }
+            .bento { gap: 0.6rem; }
+            .card-social { padding: 0.8rem 0; gap: 0.4rem;}
+            .card-social i { font-size: 1.4rem; }
+            .card-wide { padding: 0.7rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-light"></div>
+    <div class="ambient-light ambient-light-2"></div>
+
+    <div class="container">
+        <!-- Profil qismi -->
+        <div class="header anim-fade-up">
+            <div class="avatar-wrap">
+                <!-- RASM UCHUN -->
+                <img src="profile.jpg" alt="Bekhzod Ikramov">
+            </div>
+            <h1 class="name">Bekhzod Ikramov</h1>
+            <p class="role">CEO &bull; COO &bull; IT Project Manager</p>
+            <p class="bio">12 yildan ortiq boshqaruv tajribasi. Sobiq PDP Academy direktori. O'zbekistondagi IT va biznes sohasida kuchli networking va ekspertizaga ega.</p>
+        </div>
+
+        <!-- Bento Grid qismi -->
+        <div class="bento">
+            <!-- LINKLAR UCHUN: href larni o'zgartiring -->
+            
+            <a href="#" class="card card-social anim-fade-up delay-1" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+            
+            <a href="https://t.me/Bekhzodikramov" class="card card-social anim-fade-up delay-1" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Telegram</span>
+            </a>
+
+            <a href="#" class="card card-wide anim-fade-up delay-2" target="_blank">
+                <i class="fas fa-briefcase"></i>
+                <div class="card-text">
+                    <span class="card-title">Fikr Yetakchilari</span>
+                    <span class="card-subtitle">Operatsion Direktor (COO)</span>
+                </div>
+            </a>
+
+            <a href="#" class="card card-wide anim-fade-up delay-3" target="_blank">
+                <i class="fas fa-building"></i>
+                <div class="card-text">
+                    <span class="card-title">PDP Academy</span>
+                    <span class="card-subtitle">Sobiq Bosh Direktor (CEO)</span>
+                </div>
+            </a>
+
+            <a href="#" class="card card-wide card-highlight anim-fade-up delay-4" target="_blank">
+                <i class="fas fa-chart-line"></i>
+                <div class="card-text">
+                    <span class="card-title">Portfolio va Natijalar</span>
+                    <span class="card-subtitle">1700% ROMI ko'rsatkichi</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer anim-fade-up delay-4">
+            PMP Certified | 12+ Years Experience
+        </div>
+    </div>
+</body>
+</html>
