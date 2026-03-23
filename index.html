@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Profil rasmining "bittada" chiqishi uchun eng yuqori ustuvorlik -->
+    <link rel="preload" href="profile.jpg" as="image" type="image/jpeg">
+    
     <style>
         :root {
             /* Premium Monochrome Dark Theme */
@@ -266,7 +269,7 @@
         <div class="header anim-fade-up">
             <div class="avatar-wrap">
                 <!-- RASM UCHUN -->
-                <img src="profile.jpg" alt="Bekhzod Ikramov">
+                <img src="profile.jpg" alt="Bekhzod Ikramov" fetchpriority="high" decoding="sync">
             </div>
             <h1 class="name">Bekhzod Ikramov</h1>
             <p class="role">CEO &bull; COO &bull; IT Project Manager</p>
