@@ -13,7 +13,7 @@
     
     <style>
         :root {
-            /* Premium Monochrome Dark Theme */
+            /* Kechki (Tungi) Premium Dizayn - Standart */
             --bg-base: #050505;
             --glass-bg: rgba(25, 25, 25, 0.4);
             --glass-border: rgba(255, 255, 255, 0.06);
@@ -21,6 +21,25 @@
             --border-hover: rgba(255, 255, 255, 0.25);
             --text-main: #ffffff;
             --text-muted: #999999;
+            --glow-light: rgba(255, 255, 255, 0.03);
+            --neon-shadow: rgba(255, 255, 255, 0.08);
+            --highlight-bg: rgba(35, 35, 35, 0.5);
+            --highlight-hover: rgba(45, 45, 45, 0.8);
+        }
+
+        body.light-mode {
+            /* Kunduzgi (Yorug') Premium Dizayn */
+            --bg-base: #f3f4f6;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.9);
+            --border-hover: rgba(0, 0, 0, 0.2);
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --glow-light: rgba(0, 0, 0, 0.03);
+            --neon-shadow: rgba(0, 0, 0, 0.1);
+            --highlight-bg: rgba(255, 255, 255, 0.8);
+            --highlight-hover: rgba(243, 244, 246, 0.9);
         }
 
         * {
@@ -34,7 +53,6 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-base);
             color: var(--text-main);
-            /* Bitta sahifa, scroll umuman bo'lmaydi */
             height: 100vh;
             width: 100vw;
             overflow: hidden; 
@@ -42,6 +60,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         /* Ambient Orqa fon nur effekti */
@@ -50,18 +69,48 @@
             width: 60vh;
             height: 60vh;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--glow-light) 0%, transparent 70%);
             top: -20%;
             left: -10%;
             pointer-events: none;
             z-index: 0;
+            transition: background 0.5s ease;
         }
         .ambient-light-2 {
             top: auto;
             bottom: -20%;
             left: auto;
             right: -10%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+        }
+
+        /* Kunduzgi / Tungi rejim tugmasi */
+        .theme-toggle {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.08) translateY(-2px);
+            background: var(--glass-hover);
+            box-shadow: 0 4px 15px var(--neon-shadow);
+        }
+        .theme-toggle i {
+            transition: transform 0.4s ease;
         }
 
         .container {
@@ -87,7 +136,7 @@
             height: 85px;
             border-radius: 50%;
             padding: 3px;
-            background: linear-gradient(145deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+            background: linear-gradient(145deg, rgba(128,128,128,0.2) 0%, transparent 100%);
             margin-bottom: 0.8rem;
         }
 
@@ -96,7 +145,7 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            background: #111;
+            background: var(--bg-base);
         }
 
         .name {
@@ -120,7 +169,6 @@
             color: var(--text-muted);
             line-height: 1.4;
             font-weight: 300;
-            /* Faqat 3 qatorda kesish */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -152,7 +200,7 @@
         .card:hover {
             background: var(--glass-hover);
             border-color: var(--border-hover);
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.08); /* Minimalist Neon Glow effect */
+            box-shadow: 0 0 25px var(--neon-shadow);
             transform: translateY(-2px);
         }
 
@@ -207,13 +255,13 @@
 
         /* Maxsus ajratilgan tugma (Portfolio) */
         .card-highlight {
-            background: rgba(35, 35, 35, 0.5);
-            border-color: rgba(255, 255, 255, 0.12);
+            background: var(--highlight-bg);
+            border-color: var(--border-hover);
         }
         
         .card-highlight:hover {
-            background: rgba(45, 45, 45, 0.8);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.12);
+            background: var(--highlight-hover);
+            box-shadow: 0 0 30px var(--neon-shadow);
         }
 
         .card-highlight .card-title {
@@ -248,6 +296,7 @@
 
         /* Kichik ekranli telefonlar uchun zichlashtirish */
         @media (max-height: 650px) {
+            .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1rem; }
             .avatar-wrap { width: 70px; height: 70px; margin-bottom: 0.4rem; }
             .name { font-size: 1.15rem; }
             .role { font-size: 0.7rem; margin-bottom: 0.4rem;}
@@ -263,6 +312,11 @@
 <body>
     <div class="ambient-light"></div>
     <div class="ambient-light ambient-light-2"></div>
+
+    <!-- Tungi/Kunduzgi rejimni almashtiruvchi tugma -->
+    <button class="theme-toggle anim-fade-up" id="themeToggleBtn" aria-label="Toggle Theme">
+        <i class="fas fa-sun" id="themeIcon"></i>
+    </button>
 
     <div class="container">
         <!-- Profil qismi -->
@@ -319,5 +373,36 @@
             PMP Certified | 12+ Years Experience
         </div>
     </div>
+
+    <!-- JavaScript - Rejimni saqlab qolish va o'zgartirish uchun -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Xotiradan oldingi tanlovni o'qish (Light yoki Dark)
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            // Iconkaning o'zini aylanish animatsiyasi
+            themeIcon.style.transform = "rotate(360deg)";
+            setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
+
+            // Rejimni almashtirish
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
 </body>
 </html>
