@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bekhzod Ikramov | Hub</title>
-    <!-- Premium Font: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Premium Font: Poppins & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Profil rasmining "bittada" chiqishi uchun eng yuqori ustuvorlik -->
@@ -13,33 +13,33 @@
     
     <style>
         :root {
-            /* Kechki (Tungi) Premium Dizayn - Standart */
-            --bg-base: #050505;
-            --glass-bg: rgba(25, 25, 25, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.06);
-            --glass-hover: rgba(35, 35, 35, 0.6);
-            --border-hover: rgba(255, 255, 255, 0.25);
+            /* Tungi Rejim (Premium Dark) */
+            --bg-base: #030305;
+            --glass-bg: rgba(20, 20, 22, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-hover: rgba(35, 35, 40, 0.5);
             --text-main: #ffffff;
-            --text-muted: #999999;
-            --glow-light: rgba(255, 255, 255, 0.03);
-            --neon-shadow: rgba(255, 255, 255, 0.08);
-            --highlight-bg: rgba(35, 35, 35, 0.5);
-            --highlight-hover: rgba(45, 45, 45, 0.8);
+            --text-muted: #a1a1aa;
+            --blob-1: #6366f1;
+            --blob-2: #ec4899;
+            --blob-3: #8b5cf6;
+            --highlight-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.15));
+            --highlight-border: rgba(236, 72, 153, 0.3);
         }
 
         body.light-mode {
-            /* Kunduzgi (Yorug') Premium Dizayn */
-            --bg-base: #f3f4f6;
+            /* Kunduzgi Rejim (Premium Light) */
+            --bg-base: #f0f2f5;
             --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.8);
             --glass-hover: rgba(255, 255, 255, 0.9);
-            --border-hover: rgba(0, 0, 0, 0.2);
-            --text-main: #111827;
-            --text-muted: #4b5563;
-            --glow-light: rgba(0, 0, 0, 0.03);
-            --neon-shadow: rgba(0, 0, 0, 0.1);
-            --highlight-bg: rgba(255, 255, 255, 0.8);
-            --highlight-hover: rgba(243, 244, 246, 0.9);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --blob-1: #a5b4fc;
+            --blob-2: #fbcfe8;
+            --blob-3: #c4b5fd;
+            --highlight-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            --highlight-border: rgba(236, 72, 153, 0.4);
         }
 
         * {
@@ -50,7 +50,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Outfit', sans-serif;
             background-color: var(--bg-base);
             color: var(--text-main);
             height: 100vh;
@@ -60,36 +60,75 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background-color 0.8s ease, color 0.8s ease;
         }
 
-        /* Ambient Orqa fon nur effekti */
-        .ambient-light {
+        /* --- WOOOW DYNAMIC BACKGROUND BLOBS --- */
+        .blob-cont {
             position: absolute;
-            width: 60vh;
-            height: 60vh;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--glow-light) 0%, transparent 70%);
-            top: -20%;
-            left: -10%;
-            pointer-events: none;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
             z-index: 0;
-            transition: background 0.5s ease;
-        }
-        .ambient-light-2 {
-            top: auto;
-            bottom: -20%;
-            left: auto;
-            right: -10%;
+            filter: blur(80px); /* Massive blur for premium glow */
+            pointer-events: none;
         }
 
-        /* Kunduzgi / Tungi rejim tugmasi */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            animation: moveBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.6;
+            transition: background 1s ease;
+        }
+
+        .blob-1 {
+            width: 300px; height: 300px;
+            background: var(--blob-1);
+            top: 10%; left: 20%;
+        }
+
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: var(--blob-2);
+            bottom: -10%; right: -5%;
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 250px; height: 250px;
+            background: var(--blob-3);
+            top: 40%; left: -10%;
+            animation-delay: -10s;
+        }
+
+        #mouse-blob {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--text-main) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.05;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 100px) scale(0.9); }
+            100% { transform: translate(-20px, -20px) scale(1); }
+        }
+
+        /* --- THEME TOGGLE --- */
         .theme-toggle {
             position: absolute;
-            top: 24px;
-            right: 24px;
-            width: 45px;
-            height: 45px;
+            top: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -97,33 +136,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .theme-toggle:hover {
-            transform: scale(1.08) translateY(-2px);
+            transform: scale(1.1) rotate(15deg);
             background: var(--glass-hover);
-            box-shadow: 0 4px 15px var(--neon-shadow);
-        }
-        .theme-toggle i {
-            transition: transform 0.4s ease;
         }
 
         .container {
             width: 100%;
             max-width: 420px;
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.5rem;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1.1rem;
         }
 
-        /* --- Header (Profil) --- */
+        /* --- Header Profile --- */
         .header {
             text-align: center;
             display: flex;
@@ -131,13 +167,35 @@
             align-items: center;
         }
 
+        /* Neon Avatar Pulse */
         .avatar-wrap {
-            width: 85px;
-            height: 85px;
+            position: relative;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             padding: 3px;
-            background: linear-gradient(145deg, rgba(128,128,128,0.2) 0%, transparent 100%);
+            background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b);
+            background-size: 300% 300%;
+            animation: gradientBorder 6s ease infinite;
             margin-bottom: 0.8rem;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .avatar-wrap::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            background: inherit;
+            filter: blur(10px);
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .avatar-wrap img {
@@ -145,37 +203,48 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            background: var(--bg-base);
+            border: 2px solid var(--bg-base);
+            z-index: 2;
+            position: relative;
         }
 
         .name {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             letter-spacing: -0.5px;
             margin-bottom: 0.1rem;
+            background: linear-gradient(to right, #a855f7, #ec4899, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shineText 5s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
         }
 
         .role {
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-bottom: 0.6rem;
         }
 
         .bio {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.4;
-            font-weight: 300;
+            font-weight: 400;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        /* --- Bento Grid Layout --- */
+        /* --- Glassmorphism Cards with Tilt --- */
         .bento {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -185,56 +254,65 @@
         .card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 18px;
+            border-radius: 20px;
             text-decoration: none;
             color: var(--text-main);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             position: relative;
             display: flex;
             align-items: center;
             overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            transform-style: preserve-3d; /* Key for internal 3D depth */
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .card:hover {
-            background: var(--glass-hover);
-            border-color: var(--border-hover);
-            box-shadow: 0 0 25px var(--neon-shadow);
-            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        /* Ijtimoiy tarmoqlar (kichik kubiklar) */
+        /* Internal element 3D parallax effect */
+        .card > * {
+            transform: translateZ(20px);
+        }
+
+        /* Social Squares */
         .card-social {
-            padding: 1.1rem 0;
+            padding: 1.2rem 0;
             flex-direction: column;
             justify-content: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
+            text-align: center;
         }
 
         .card-social i {
-            font-size: 1.6rem;
-            color: var(--text-main);
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .card-social span {
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* Keng qatorlar (Portfolio, Ish joylari) */
+        /* Wide Rectangles */
         .card-wide {
             grid-column: span 2;
-            padding: 0.9rem 1.2rem;
+            padding: 1rem 1.2rem;
         }
 
         .card-wide i {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             width: 35px;
             text-align: center;
             margin-right: 0.8rem;
-            color: var(--text-main);
-            opacity: 0.9;
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .card-text {
@@ -243,8 +321,8 @@
         }
 
         .card-title {
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
         .card-subtitle {
@@ -253,19 +331,33 @@
             margin-top: 0.1rem;
         }
 
-        /* Maxsus ajratilgan tugma (Portfolio) */
+        /* Highlight Ribbon Card */
         .card-highlight {
-            background: var(--highlight-bg);
-            border-color: var(--border-hover);
+            background: var(--highlight-gradient);
+            border-color: var(--highlight-border);
         }
         
-        .card-highlight:hover {
-            background: var(--highlight-hover);
-            box-shadow: 0 0 30px var(--neon-shadow);
+        .card-highlight::after {
+            content: '🔥 WOOOW';
+            position: absolute;
+            top: -5px; right: -25px;
+            background: linear-gradient(to right, #f59e0b, #ef4444);
+            color: white;
+            font-size: 0.5rem;
+            font-weight: bold;
+            padding: 12px 25px 2px 25px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .card-highlight i {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .card-highlight .card-title {
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* Footer */
@@ -273,78 +365,84 @@
             text-align: center;
             font-size: 0.7rem;
             color: var(--text-muted);
-            opacity: 0.5;
-            margin-top: 0.2rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            font-weight: 500;
             letter-spacing: 0.5px;
         }
 
-        /* Animatsiyalar */
-        .anim-fade-up {
+        /* Spring Animations */
+        .anim-pop {
             opacity: 0;
-            animation: fadeUp 0.6s ease-out forwards;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes popIn {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
 
-        /* Kichik ekranli telefonlar uchun zichlashtirish */
         @media (max-height: 650px) {
-            .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1rem; }
-            .avatar-wrap { width: 70px; height: 70px; margin-bottom: 0.4rem; }
-            .name { font-size: 1.15rem; }
+            .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; }
+            .avatar-wrap { width: 75px; height: 75px; }
+            .name { font-size: 1.3rem; }
             .role { font-size: 0.7rem; margin-bottom: 0.4rem;}
             .bio { font-size: 0.75rem; }
-            .container { gap: 0.8rem; }
+            .container { gap: 0.8rem; padding: 0.8rem; }
             .bento { gap: 0.6rem; }
-            .card-social { padding: 0.8rem 0; gap: 0.4rem;}
+            .card-social { padding: 0.9rem 0; gap: 0.3rem;}
             .card-social i { font-size: 1.4rem; }
-            .card-wide { padding: 0.7rem 1rem; }
+            .card-wide { padding: 0.8rem 1rem; }
+            .card-wide i { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="ambient-light"></div>
-    <div class="ambient-light ambient-light-2"></div>
+    <!-- WOOOW DYNAMIC BACKGROUND -->
+    <div class="blob-cont">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    
+    <!-- MOUSE FOLLOWER BLOB -->
+    <div id="mouse-blob"></div>
 
-    <!-- Tungi/Kunduzgi rejimni almashtiruvchi tugma -->
-    <button class="theme-toggle anim-fade-up" id="themeToggleBtn" aria-label="Toggle Theme">
+    <!-- Theme Toggle -->
+    <button class="theme-toggle anim-pop" id="themeToggleBtn">
         <i class="fas fa-sun" id="themeIcon"></i>
     </button>
 
     <div class="container">
-        <!-- Profil qismi -->
-        <div class="header anim-fade-up">
+        <!-- Header -->
+        <div class="header anim-pop delay-1">
             <div class="avatar-wrap">
-                <!-- RASM UCHUN -->
-                <img src="profile.jpg" alt="Bekhzod Ikramov" fetchpriority="high" decoding="sync">
+                <img src="profile.jpg" alt="Bekhzod Ikramov" fetchpriority="high">
             </div>
             <h1 class="name">Bekhzod Ikramov</h1>
             <p class="role">CEO &bull; COO &bull; IT Project Manager</p>
-            <p class="bio">12 yildan ortiq boshqaruv tajribasi. Sobiq PDP Academy direktori. O'zbekistondagi IT va biznes sohasida kuchli networking va ekspertizaga ega.</p>
+            <p class="bio">12+ yillik boshqaruv tajribasi. Sobiq PDP Academy direktori. O'zbekistondagi IT/Biznes va liderlik sohalarida vizyoner ekspert.</p>
         </div>
 
-        <!-- Bento Grid qismi -->
+        <!-- 3D Bento Grid -->
         <div class="bento">
-            <!-- LINKLAR UCHUN: href larni o'zgartiring -->
-            
-            <a href="#" class="card card-social anim-fade-up delay-1" target="_blank">
+            <a href="#" class="card card-social anim-pop delay-2" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
                 <i class="fab fa-linkedin-in"></i>
                 <span>LinkedIn</span>
             </a>
             
-            <a href="https://t.me/Bekhzodikramov" class="card card-social anim-fade-up delay-1" target="_blank">
+            <a href="https://t.me/Bekhzodikramov" class="card card-social anim-pop delay-2" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
                 <i class="fab fa-telegram-plane"></i>
                 <span>Telegram</span>
             </a>
 
-            <a href="#" class="card card-wide anim-fade-up delay-2" target="_blank">
+            <a href="#" class="card card-wide anim-pop delay-3" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
                 <i class="fas fa-briefcase"></i>
                 <div class="card-text">
                     <span class="card-title">Fikr Yetakchilari</span>
@@ -352,7 +450,7 @@
                 </div>
             </a>
 
-            <a href="#" class="card card-wide anim-fade-up delay-3" target="_blank">
+            <a href="#" class="card card-wide anim-pop delay-4" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
                 <i class="fas fa-building"></i>
                 <div class="card-text">
                     <span class="card-title">PDP Academy</span>
@@ -360,7 +458,7 @@
                 </div>
             </a>
 
-            <a href="#" class="card card-wide card-highlight anim-fade-up delay-4" target="_blank">
+            <a href="#" class="card card-wide card-highlight anim-pop delay-5" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.04" data-tilt-glare-prerender="false">
                 <i class="fas fa-chart-line"></i>
                 <div class="card-text">
                     <span class="card-title">Portfolio va Natijalar</span>
@@ -369,18 +467,21 @@
             </a>
         </div>
 
-        <div class="footer anim-fade-up delay-4">
+        <div class="footer anim-pop delay-5">
             PMP Certified | 12+ Years Experience
         </div>
     </div>
 
-    <!-- JavaScript - Rejimni saqlab qolish va o'zgartirish uchun -->
+    <!-- Vanilla-Tilt library for 3D interactions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+    <!-- JS Logic -->
     <script>
+        // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         const themeIcon = document.getElementById('themeIcon');
         const body = document.body;
 
-        // Xotiradan oldingi tanlovni o'qish (Light yoki Dark)
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'light') {
             body.classList.add('light-mode');
@@ -388,11 +489,9 @@
         }
 
         themeToggleBtn.addEventListener('click', () => {
-            // Iconkaning o'zini aylanish animatsiyasi
             themeIcon.style.transform = "rotate(360deg)";
             setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
 
-            // Rejimni almashtirish
             body.classList.toggle('light-mode');
             
             if (body.classList.contains('light-mode')) {
@@ -403,6 +502,18 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
+
+        // Mouse Follower Blob
+        const mouseBlob = document.getElementById('mouse-blob');
+        document.addEventListener('mousemove', (e) => {
+            mouseBlob.style.left = e.clientX + 'px';
+            mouseBlob.style.top = e.clientY + 'px';
+        });
+
+        // Disable mouse follower on touch devices for performance
+        if ('ontouchstart' in window) {
+            mouseBlob.style.display = 'none';
+        }
     </script>
 </body>
 </html>
