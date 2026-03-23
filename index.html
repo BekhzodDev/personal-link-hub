@@ -3,51 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Bekhzod Ikramov | Hub</title>
-    <!-- Premium Font: Poppins & Outfit -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Bekhzod Ikramov | Premium Hub</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Profil rasmining "bittada" chiqishi uchun eng yuqori ustuvorlik -->
     <link rel="preload" href="profile.jpg" as="image" type="image/jpeg">
     
     <style>
         :root {
-            /* Tungi Rejim (Premium Dark) */
+            /* Dark Mode Defaults */
             --bg-base: #030305;
-            --glass-bg: rgba(20, 20, 22, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --glass-hover: rgba(35, 35, 40, 0.5);
+            --fade-color: rgba(3, 3, 5, 1);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            --blob-1: #6366f1;
-            --blob-2: #ec4899;
-            --blob-3: #8b5cf6;
-            --highlight-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.15));
-            --highlight-border: rgba(236, 72, 153, 0.3);
+            --text-muted: #9ca3af;
+            --accent: #ec4899;
         }
 
         body.light-mode {
-            /* Kunduzgi Rejim (Premium Light) */
-            --bg-base: #f0f2f5;
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.8);
-            --glass-hover: rgba(255, 255, 255, 0.9);
+            --bg-base: #f8fafc;
+            --fade-color: rgba(248, 250, 252, 1);
+            --glass-bg: rgba(0, 0, 0, 0.04);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-hover: rgba(0, 0, 0, 0.06);
             --text-main: #0f172a;
-            --text-muted: #64748b;
-            --blob-1: #a5b4fc;
-            --blob-2: #fbcfe8;
-            --blob-3: #c4b5fd;
-            --highlight-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-            --highlight-border: rgba(236, 72, 153, 0.4);
+            --text-muted: #475569;
+            --accent: #ec4899;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Outfit', sans-serif;
@@ -57,435 +43,373 @@
             width: 100vw;
             overflow: hidden; 
             display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            flex-direction: column;
             transition: background-color 0.8s ease, color 0.8s ease;
         }
 
-        /* --- WOOOW DYNAMIC BACKGROUND BLOBS --- */
-        .blob-cont {
-            position: absolute;
-            width: 100vw;
-            height: 100vh;
+        /* --- IMMERSIVE HERO IMAGE --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 52vh; /* Katta joyni egallaydi */
+            flex-shrink: 0;
             overflow: hidden;
-            z-index: 0;
-            filter: blur(80px); /* Massive blur for premium glow */
-            pointer-events: none;
+            background-color: #000;
         }
 
-        .blob {
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top; /* Yuz qismi va kitoblar to'liq tushishi uchun */
+            filter: contrast(1.05) brightness(0.95);
+            transform: scale(1);
+            animation: slowZoom 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Sekinlik bilan fon rangiga singdirish (Cinematic Fade) */
+        .hero-fade {
             position: absolute;
-            border-radius: 50%;
-            animation: moveBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.6;
-            transition: background 1s ease;
-        }
-
-        .blob-1 {
-            width: 300px; height: 300px;
-            background: var(--blob-1);
-            top: 10%; left: 20%;
-        }
-
-        .blob-2 {
-            width: 400px; height: 400px;
-            background: var(--blob-2);
-            bottom: -10%; right: -5%;
-            animation-delay: -5s;
-        }
-
-        .blob-3 {
-            width: 250px; height: 250px;
-            background: var(--blob-3);
-            top: 40%; left: -10%;
-            animation-delay: -10s;
-        }
-
-        #mouse-blob {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--text-main) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.05;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent 0%, var(--fade-color) 100%);
             z-index: 1;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.5s ease;
+            pointer-events: none;
+            transition: background 0.8s ease;
         }
 
-        @keyframes moveBlob {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(100px, -50px) scale(1.1); }
-            66% { transform: translate(-50px, 100px) scale(0.9); }
-            100% { transform: translate(-20px, -20px) scale(1); }
-        }
-
-        /* --- THEME TOGGLE --- */
+        /* Hover theme toggle */
         .theme-toggle {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 48px;
-            height: 48px;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             z-index: 100;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
+
         .theme-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-            background: var(--glass-hover);
+            transform: scale(1.1) rotate(20deg);
+            background: rgba(0,0,0,0.6);
         }
 
-        .container {
+        /* --- CONTENT SECTION --- */
+        .content-section {
+            position: relative;
             width: 100%;
-            max-width: 420px;
-            padding: 1rem 1.5rem;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem; /* Slightly reduced gap to fit larger image */
-        }
-
-        /* --- Header Profile --- */
-        .header {
-            text-align: center;
+            height: 48vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 0 1.5rem 1rem 1.5rem;
+            z-index: 10;
+            margin-top: -65px; /* Matn rasmni ustiga chiqishi uchun */
         }
 
-        /* Neon Avatar Pulse (Squircle Edition) */
-        .avatar-wrap {
-            position: relative;
-            width: 115px;   /* Much larger */
-            height: 115px;
-            border-radius: 38px; /* Modern Squircle for high taste */
-            padding: 3px;
-            background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b);
-            background-size: 300% 300%;
-            animation: gradientBorder 6s ease infinite;
-            margin-bottom: 0.6rem;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .avatar-wrap:hover {
-            transform: scale(1.05) translateY(-3px);
-        }
-
-        .avatar-wrap::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            border-radius: 40px; /* Squircle glow */
-            background: inherit;
-            filter: blur(12px);
-            opacity: 0.6;
-            z-index: -1;
-        }
-
-        @keyframes gradientBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .avatar-wrap img {
+        .profile-info {
+            text-align: center;
+            margin-bottom: 1.2rem;
             width: 100%;
-            height: 100%;
-            border-radius: 35px; /* Squircle inner mask */
-            object-fit: cover;
-            border: 3px solid var(--bg-base);
-            z-index: 2;
-            position: relative;
-            transition: border-color 0.6s ease;
+            max-width: 450px;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .name {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem; 
+            font-weight: 600;
+            font-style: italic;
             letter-spacing: -0.5px;
-            margin-bottom: 0.1rem;
-            background: linear-gradient(to right, #a855f7, #ec4899, #f43f5e);
+            margin-bottom: 0.2rem;
+            background: linear-gradient(to right, #fff, #d4d4d8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shineText 5s linear infinite;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            transition: all 0.5s ease;
+        }
+        
+        body.light-mode .name {
+            background: linear-gradient(to right, #0f172a, #475569);
+            -webkit-background-clip: text;
+            text-shadow: none;
         }
 
-        @keyframes shineText {
-            to { background-position: 200% center; }
+        .role-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.7rem;
         }
 
-        .role {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
+        .tag {
+            font-size: 0.65rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.6rem;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            backdrop-filter: blur(10px);
         }
 
         .bio {
             font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.4;
-            font-weight: 400;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            max-width: 90%;
+            margin: 0 auto;
         }
 
-        /* --- Glassmorphism Cards with Tilt --- */
-        .bento {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
+        /* --- LINKS STACK (Slim sleek cards) --- */
+        .links-stack {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            animation: staggerSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            text-decoration: none;
-            color: var(--text-main);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            position: relative;
+        .link-card {
             display: flex;
             align-items: center;
+            padding: 0.7rem 1.2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-main);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
-            transform-style: preserve-3d; /* Key for internal 3D depth */
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        .link-card:hover {
+            transform: translateX(10px);
+            background: var(--glass-hover);
+            border-color: rgba(236, 72, 153, 0.3);
+            box-shadow: -5px 5px 20px rgba(0,0,0,0.05);
         }
 
-        /* Internal element 3D parallax effect */
-        .card > * {
-            transform: translateZ(20px);
-        }
-
-        /* Social Squares */
-        .card-social {
-            padding: 1.2rem 0;
-            flex-direction: column;
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            text-align: center;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            transition: transform 0.4s ease, background 0.4s ease, color 0.4s ease;
         }
 
-        .card-social i {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #a855f7, #6366f1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        body.light-mode .icon-box {
+            background: rgba(0,0,0,0.03);
         }
 
-        .card-social span {
-            font-size: 0.85rem;
-            font-weight: 600;
+        .link-card:hover .icon-box {
+            background: var(--accent);
+            color: white;
+            border-color: transparent;
+            transform: rotate(10deg);
         }
 
-        /* Wide Rectangles */
-        .card-wide {
-            grid-column: span 2;
-            padding: 1rem 1.2rem;
-        }
-
-        .card-wide i {
-            font-size: 1.4rem;
-            width: 35px;
-            text-align: center;
-            margin-right: 0.8rem;
-            background: linear-gradient(135deg, #ec4899, #f43f5e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .card-text {
+        .link-text {
             display: flex;
             flex-direction: column;
+            flex: 1;
         }
 
-        .card-title {
+        .link-title {
             font-size: 0.95rem;
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        .card-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.1rem;
-        }
-
-        /* Highlight Ribbon Card */
-        .card-highlight {
-            background: var(--highlight-gradient);
-            border-color: var(--highlight-border);
-        }
-        
-        .card-highlight::after {
-            content: '🔥 WOOOW';
-            position: absolute;
-            top: -5px; right: -25px;
-            background: linear-gradient(to right, #f59e0b, #ef4444);
-            color: white;
-            font-size: 0.5rem;
-            font-weight: bold;
-            padding: 12px 25px 2px 25px;
-            transform: rotate(45deg);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .card-highlight i {
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .card-highlight .card-title {
-            font-weight: 700;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
+        .link-subtitle {
             font-size: 0.7rem;
             color: var(--text-muted);
-            opacity: 0.6;
-            margin-top: 0.5rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            margin-top: 1px;
         }
 
-        /* Spring Animations */
-        .anim-pop {
+        .link-arrow {
+            font-size: 1rem;
+            color: var(--text-muted);
             opacity: 0;
-            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--accent);
+        }
+
+        /* HIGHLIGHT CARD */
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(99, 102, 241, 0.08));
+            border: 1px solid rgba(236, 72, 153, 0.2);
         }
         
-        @keyframes popIn {
-            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+        .highlight-card .icon-box {
+            background: linear-gradient(135deg, #ec4899, #6366f1);
+            color: white;
+            border: none;
         }
 
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
+        /* GRID FOR SOCIALS */
+        .social-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
 
-        @media (max-height: 650px) {
-            .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; }
-            .avatar-wrap { width: 90px; height: 90px; border-radius: 30px; }
-            .avatar-wrap img { border-radius: 28px; }
-            .avatar-wrap::before { border-radius: 32px; }
-            .name { font-size: 1.25rem; }
-            .role { font-size: 0.65rem; margin-bottom: 0.4rem;}
-            .bio { font-size: 0.75rem; }
-            .container { gap: 0.7rem; padding: 0.8rem; }
-            .bento { gap: 0.6rem; }
-            .card-social { padding: 0.8rem 0; gap: 0.3rem;}
-            .card-social i { font-size: 1.3rem; }
-            .card-wide { padding: 0.7rem 1rem; }
-            .card-wide i { font-size: 1.1rem; }
+        .social-mini {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.8rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .social-mini:hover {
+            background: var(--glass-hover);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes staggerSlideUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Yana ham mukammal joylashishi uchun */
+        @media (max-height: 700px) {
+            .hero-section { height: 45vh; }
+            .content-section { height: 55vh; padding-top: 0; margin-top: -50px; }
+            .name { font-size: 1.8rem; margin-bottom: 0.1rem; }
+            .bio { font-size: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .icon-box { width: 35px; height: 35px; font-size: 1rem; margin-right: 0.7rem; }
+            .link-card { padding: 0.6rem 1rem; }
+            .social-mini { padding: 0.6rem; }
+            .links-stack { gap: 0.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- WOOOW DYNAMIC BACKGROUND -->
-    <div class="blob-cont">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+
+    <!-- MAMMOTH HERO SECTION -->
+    <div class="hero-section">
+        <!-- Eng yuqori did bilan ishlangan kinematik rasm -->
+        <img src="profile.jpg" alt="Bekhzod Ikramov" class="hero-img" fetchpriority="high">
+        <!-- Rasmning silliq qora fonga (yada oq fonga) o'tib ketishi -->
+        <div class="hero-fade"></div>
+        
+        <button class="theme-toggle" id="themeToggleBtn">
+            <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
     </div>
-    
-    <!-- MOUSE FOLLOWER BLOB -->
-    <div id="mouse-blob"></div>
 
-    <!-- Theme Toggle -->
-    <button class="theme-toggle anim-pop" id="themeToggleBtn">
-        <i class="fas fa-sun" id="themeIcon"></i>
-    </button>
-
-    <div class="container">
-        <!-- Header -->
-        <div class="header anim-pop delay-1">
-            <div class="avatar-wrap">
-                <img src="profile.jpg" alt="Bekhzod Ikramov" fetchpriority="high">
-            </div>
+    <!-- MAIN CONTENT -->
+    <div class="content-section">
+        
+        <div class="profile-info">
+            <!-- Juda chiroyli Playfair fontidagi ism -->
             <h1 class="name">Bekhzod Ikramov</h1>
-            <p class="role">CEO &bull; COO &bull; IT Project Manager</p>
-            <p class="bio">12+ yillik boshqaruv tajribasi. Sobiq PDP Academy direktori. O'zbekistondagi IT/Biznes va liderlik sohalarida vizyoner ekspert.</p>
+            <div class="role-tags">
+                <span class="tag">CEO</span>
+                <span class="tag">COO</span>
+                <span class="tag">IT Manager</span>
+            </div>
+            <p class="bio">12+ yillik tajriba. Sobiq PDP Academy direktori. O'zbekistondagi vizyoner va professional ekspert.</p>
         </div>
 
-        <!-- 3D Bento Grid -->
-        <div class="bento">
-            <a href="#" class="card card-social anim-pop delay-2" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
-                <i class="fab fa-linkedin-in"></i>
-                <span>LinkedIn</span>
-            </a>
+        <!-- Yana ham ingichka, nafis linklar -->
+        <div class="links-stack" id="linksStack">
             
-            <a href="https://t.me/Bekhzodikramov" class="card card-social anim-pop delay-2" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
-                <i class="fab fa-telegram-plane"></i>
-                <span>Telegram</span>
-            </a>
+            <div class="social-row">
+                <a href="#" class="social-mini" data-tilt data-tilt-scale="1.05">
+                    <i class="fab fa-linkedin" style="color: #3b82f6;"></i> LinkedIn
+                </a>
+                <a href="https://t.me/Bekhzodikramov" class="social-mini" data-tilt data-tilt-scale="1.05">
+                    <i class="fab fa-telegram" style="color: #0ea5e9;"></i> Telegram
+                </a>
+            </div>
 
-            <a href="#" class="card card-wide anim-pop delay-3" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
-                <i class="fas fa-briefcase"></i>
-                <div class="card-text">
-                    <span class="card-title">Fikr Yetakchilari</span>
-                    <span class="card-subtitle">Operatsion Direktor (COO)</span>
+            <a href="#" class="link-card" data-tilt data-tilt-max="5">
+                <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+                <div class="link-text">
+                    <span class="link-title">Fikr Yetakchilari</span>
+                    <span class="link-subtitle">Operatsion Direktor (COO)</span>
                 </div>
+                <i class="fas fa-arrow-right link-arrow"></i>
             </a>
 
-            <a href="#" class="card card-wide anim-pop delay-4" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
-                <i class="fas fa-building"></i>
-                <div class="card-text">
-                    <span class="card-title">PDP Academy</span>
-                    <span class="card-subtitle">Sobiq Bosh Direktor (CEO)</span>
+            <a href="#" class="link-card" data-tilt data-tilt-max="5">
+                <div class="icon-box"><i class="fas fa-building"></i></div>
+                <div class="link-text">
+                    <span class="link-title">PDP Academy</span>
+                    <span class="link-subtitle">Sobiq Bosh Direktor (CEO)</span>
                 </div>
+                <i class="fas fa-arrow-right link-arrow"></i>
             </a>
 
-            <a href="#" class="card card-wide card-highlight anim-pop delay-5" target="_blank" data-tilt data-tilt-glare data-tilt-max-glare="0.4" data-tilt-scale="1.04" data-tilt-glare-prerender="false">
-                <i class="fas fa-chart-line"></i>
-                <div class="card-text">
-                    <span class="card-title">Portfolio va Natijalar</span>
-                    <span class="card-subtitle">1700% ROMI ko'rsatkichi</span>
+            <a href="#" class="link-card highlight-card" data-tilt data-tilt-max="5">
+                <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                <div class="link-text">
+                    <span class="link-title">Ko'rsatkichlar va Portfolio</span>
+                    <span class="link-subtitle">1700% ROMI & Kuchli Networking</span>
                 </div>
+                <i class="fas fa-arrow-right link-arrow"></i>
             </a>
-        </div>
-
-        <div class="footer anim-pop delay-5">
-            PMP Certified | 12+ Years Experience
         </div>
     </div>
 
-    <!-- Vanilla-Tilt library for 3D interactions -->
+    <!-- JS Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
-    <!-- JS Logic -->
+    <!-- Theme Logic -->
     <script>
-        // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         const themeIcon = document.getElementById('themeIcon');
         const body = document.body;
@@ -498,7 +422,7 @@
 
         themeToggleBtn.addEventListener('click', () => {
             themeIcon.style.transform = "rotate(360deg)";
-            setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
+            setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 300);
 
             body.classList.toggle('light-mode');
             
@@ -510,18 +434,6 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
-
-        // Mouse Follower Blob
-        const mouseBlob = document.getElementById('mouse-blob');
-        document.addEventListener('mousemove', (e) => {
-            mouseBlob.style.left = e.clientX + 'px';
-            mouseBlob.style.top = e.clientY + 'px';
-        });
-
-        // Disable mouse follower on touch devices for performance
-        if ('ontouchstart' in window) {
-            mouseBlob.style.display = 'none';
-        }
     </script>
 </body>
 </html>
